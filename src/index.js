@@ -5,9 +5,9 @@ import * as serviceWorker from "./serviceWorker";
 import "antd/dist/antd.css";
 import { Button, Layout, Space } from "antd";
 import HomePageContainer from "./components/HomePageContainer";
-import SearchPageContainer from "./components/SearchPageContainer";
+import SearchPageContainer from "./components/search_page/SearchPageContainer";
 import { CarOutlined } from "@ant-design/icons";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const { Header, Content, Footer } = Layout;
 
@@ -16,7 +16,9 @@ ReactDOM.render(
     <Router>
       <Layout className="layout">
         <Header className="layoutHeader">
+          <Link to="/">
           <CarOutlined className="headerLogo" />
+          </Link>
           <div className="loginAndRegister">
             <Space>
               <Button type="primary">Login</Button>

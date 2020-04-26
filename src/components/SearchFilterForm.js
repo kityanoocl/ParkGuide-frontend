@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Radio,
-  DatePicker,
-  TimePicker,
-  Form,
-  Button,
-  Switch,
-  Select,
-} from "antd";
+import { Radio, DatePicker, Form, Button, Switch, Select } from "antd";
 import { DURATION_DROPDOWN } from "../constants/constants";
 import ParkGuideApi from "../apis/ParkGuideApi";
 import {
@@ -16,6 +8,7 @@ import {
   FileJpgOutlined,
 } from "@ant-design/icons";
 import "./SearchFilterForm.css";
+import moment from "moment";
 
 const { Option } = Select;
 
@@ -42,14 +35,21 @@ class SearchFilterForm extends Component {
   }
 
   render() {
+    function disabledDate(current) {
+      // Can not select days before today
+      return current < moment().subtract(1, "days");
+    }
+
     return (
       <div className="searchForm">
         <Form>
           <Form.Item label="I'm looking for a carpark on">
-            <DatePicker />
-          </Form.Item>
-          <Form.Item label="Arriving at">
-            <TimePicker />
+            <DatePicker
+              disabledDate={disabledDate}
+              showTime={{
+                defaultValue: moment(moment().format("hh:mm:ss"), "HH:mm:ss"),
+              }}
+            />
           </Form.Item>
           <Form.Item label="And the duration is">
             <Select placeholder="Dur. (hrs)" style={{ width: 110 }}>
