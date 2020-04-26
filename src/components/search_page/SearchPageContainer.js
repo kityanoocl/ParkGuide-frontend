@@ -15,7 +15,8 @@ class SearchPageContainer extends Component {
     };
   }
 
-  searchParkingSLots(location) {
+  searchParkingSLots(form) {
+    console.log(form);
     ParkGuideApi.getAllParkingLots().then((response) => {
       this.setState({ results: response.data });
     });

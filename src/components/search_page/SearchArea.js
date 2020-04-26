@@ -17,7 +17,9 @@ class SearchArea extends Component {
     super(props);
 
     this.handleLocationChange = this.handleLocationChange.bind(this);
-    this.handleArrivalDateTimeChange = this.handleArrivalDateTimeChange.bind(this);
+    this.handleArrivalDateTimeChange = this.handleArrivalDateTimeChange.bind(
+      this
+    );
     this.handleDurationChange = this.handleDurationChange.bind(this);
     this.handleAdvanceSearchOnChange = this.handleAdvanceSearchOnChange.bind(
       this
@@ -25,6 +27,7 @@ class SearchArea extends Component {
     this.handleSearchOnClick = this.handleSearchOnClick.bind(this);
 
     this.state = {
+      isAdvance: false,
       locations: [],
       selectedLocation: "",
       selectedArrivalDateTime: "",
@@ -46,7 +49,7 @@ class SearchArea extends Component {
   handleArrivalDateTimeChange(date, dateString) {
     console.log(date);
     console.log(dateString);
-    // this.setState({ selectedArrivalDateTime: value });
+    this.setState({ selectedArrivalDateTime: dateString });
   }
 
   handleDurationChange(value) {
@@ -54,11 +57,14 @@ class SearchArea extends Component {
   }
 
   handleAdvanceSearchOnChange(checked) {
-    this.setState({ advancedSearchDisplay: checked ? "flex" : "none" });
+    this.setState({
+      isAdvance: checked ? true : false,
+      advancedSearchDisplay: checked ? "flex" : "none",
+    });
   }
 
   handleSearchOnClick() {
-    this.props.searchParkingSLots(this.state.selectedLocation);
+    this.props.searchParkingSLots(this.state);
   }
 
   render() {
@@ -96,7 +102,11 @@ class SearchArea extends Component {
           </Form.Item>
           <Form.Item>
             <span>Duration:</span>
-            <Select placeholder="Dur. (hrs)" style={{ width: 110 }} onChange={this.handleDurationChange}>
+            <Select
+              placeholder="Dur. (hrs)"
+              style={{ width: 110 }}
+              onChange={this.handleDurationChange}
+            >
               {DURATION_DROPDOWN.map((duration_amount) => (
                 <Option key={"dur_" + duration_amount} value={duration_amount}>
                   {duration_amount}
