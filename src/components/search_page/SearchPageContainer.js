@@ -4,6 +4,7 @@ import SearchArea from "./SearchArea";
 import SearchResult from "./SearchResult";
 import ParkGuideApi from "../../apis/ParkGuideApi";
 import OrderModal from '../order-modal/OrderModal';
+import Facebook from "../Facebook";
 
 class SearchPageContainer extends Component {
   constructor(props) {
@@ -21,11 +22,11 @@ class SearchPageContainer extends Component {
   }
 
   setModalVisible = (visible) => {
-      this.setState({modalVisible: visible})
+    this.setState({ modalVisible: visible })
   }
   searchParkingSLots(params) {
     ParkGuideApi.getParkingSlots(params).then((response) => {
-      this.setState({ 
+      this.setState({
         results: response.data,
         userCriteria: params
       });
@@ -34,22 +35,37 @@ class SearchPageContainer extends Component {
 
   setModalContent = (modalContent) => {
     console.log(modalContent);
-    this.setState({modalContent});
+    this.setState({ modalContent });
   }
 
   render() {
+    let searchPageContent
+    console.log(this.props.isLoggedIn)
+
+    if (this.props.isLoggedIn) {
+      searchPageContent = (
+        <div id="SearchPageContainer">
+          <SearchArea searchParkingSLots={this.searchParkingSLots} />
+          <Divider />
+          <SearchResult results={this.state.results} openModal={() => this.setModalVisible(true)} setModalContent={this.setModalContent} />
+          <OrderModal
+            modalVisible={this.state.modalVisible}
+            closeModal={() => this.setModalVisible(false)}
+            modalContent={this.state.modalContent}
+            userCriteria={this.state.userCriteria}
+          />
+        </div>
+      )
+    } else {
+      searchPageContent = (
+        <div>
+          <Facebook />
+        </div>
+      )
+    }
+
     return (
-      <div id="SearchPageContainer">
-        <SearchArea searchParkingSLots={this.searchParkingSLots} />
-        <Divider />
-        <SearchResult results={this.state.results} openModal={() => this.setModalVisible(true)} setModalContent={this.setModalContent}/>
-        <OrderModal 
-          modalVisible={this.state.modalVisible} 
-          closeModal={() => this.setModalVisible(false)} 
-          modalContent={this.state.modalContent}
-          userCriteria={this.state.userCriteria}
-        />
-      </div>
+      <div>{searchPageContent}</div>
     );
   }
 }

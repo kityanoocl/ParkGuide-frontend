@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import { Layout} from "antd";
+import { Layout } from "antd";
 import { CarOutlined } from "@ant-design/icons";
 import HomePageContainer from "./components/HomePageContainer";
 import SearchPageContainer from "./components/search_page/SearchPageContainer";
@@ -15,7 +15,7 @@ const { Header, Content, Footer } = Layout;
 export default class App extends Component {
   constructor(props) {
     super(props)
-  
+
     this.onLogin = this.onLogin.bind(this);
 
     this.state = {
@@ -24,7 +24,7 @@ export default class App extends Component {
       userID: ''
     }
   }
-  
+
   onLogin(user) {
 
     this.setState({
@@ -35,35 +35,37 @@ export default class App extends Component {
   }
 
   render() {
-  return (
-    <div className="App">
-      <Router history={history}>
-        <Layout className="layout">
-          <Header className="layoutHeader" >  
-            <Link to="/">
-              <CarOutlined className="headerLogo" />
-            </Link>
-            <NavigationBar isLoggedIn={this.state.isLoggedIn}
-            name={this.state.name} userID={this.state.userID}/>
+    console.log(this.state.isLoggedIn)
+    return (
+      <div className="App">
+        <Router history={history}>
+          <Layout className="layout">
+            <Header className="layoutHeader" >
+              <Link to="/">
+                <CarOutlined className="headerLogo" />
+              </Link>
+              <NavigationBar isLoggedIn={this.state.isLoggedIn}
+                name={this.state.name} userID={this.state.userID} />
 
-          </Header>
+            </Header>
 
-          <Content className="layoutContent">
-            <Switch>
-              <Route exact={true} path="/" component={HomePageContainer} />
-              <Route path="/search" component={SearchPageContainer} />
-              <Route path="/LoginPage" render={(props) => <LoginPage {...props} onLogin={this.onLogin} />} />
-              <Route path="/RegisterPage" component={RegisterPage} />
-              <Route path="/UserProfile/:userParam" component={UserProfile} />
-              {/* <Route path="/user-profile" component={} /> */}
-            </Switch>
-          </Content>
-          <Footer id="layoutFooter" style={{ textAlign: "center" }}>
-            All the right reserved by 500-YourThingIsBroken @copyright
+            <Content className="layoutContent">
+              <Switch>
+                <Route exact={true} path="/" component={HomePageContainer} />
+                <Route path="/search" render={(props) => <SearchPageContainer {...props} isLoggedIn={this.state.isLoggedIn} />} />
+                <Route path="/LoginPage" render={(props) => <LoginPage {...props} onLogin={this.onLogin} />} />
+                <Route path="/RegisterPage" component={RegisterPage} />
+                <Route path="/UserProfile/:userParam" component={UserProfile} />
+                {/* <Route path="/user-profile" component={} /> */}
+              </Switch>
+            </Content>
+            <Footer id="layoutFooter" style={{ textAlign: "center" }}>
+              All the right reserved by 500-YourThingIsBroken @copyright
         </Footer>
-        </Layout>
-      </Router>
-    </div>
-  );
-}}
+          </Layout>
+        </Router>
+      </div>
+    );
+  }
+}
 
