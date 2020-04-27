@@ -40,7 +40,7 @@ export default class App extends Component {
       <Router history={history}>
         <Layout className="layout">
           <Header className="layoutHeader" >  
-            <Link to="/">
+            <Link to="/" className="logoHeader">
               <CarOutlined className="headerLogo" />
             </Link>
             <NavigationBar isLoggedIn={this.state.isLoggedIn}
@@ -55,7 +55,6 @@ export default class App extends Component {
               <Route path="/LoginPage" render={(props) => <LoginPage {...props} onLogin={this.onLogin} />} />
               <Route path="/RegisterPage" component={RegisterPage} />
               <Route path="/UserProfile/:userParam" component={UserProfile} />
-              {/* <Route path="/user-profile" component={} /> */}
             </Switch>
           </Content>
           <Footer id="layoutFooter" style={{ textAlign: "center" }}>

@@ -2,11 +2,6 @@ import React, { Component } from "react";
 import { Radio, DatePicker, TimePicker, Form, Button, Select } from "antd";
 import { DURATION_DROPDOWN } from "../../constants/constants";
 import ParkGuideApi from "../../apis/ParkGuideApi";
-// import {
-//   CheckOutlined,
-//   FilePdfOutlined,
-//   FileJpgOutlined,
-// } from "@ant-design/icons";
 import "./SearchArea.css";
 import moment from "moment";
 
@@ -91,7 +86,7 @@ class SearchArea extends Component {
       <div className="searchArea">
         <Form>
           <Form.Item>
-            <span>Location:</span>
+            <span className="formLable">Location:</span>
             <Select
               placeholder="Select Location"
               style={{ width: 180 }}
@@ -105,14 +100,15 @@ class SearchArea extends Component {
             </Select>
           </Form.Item>
           <Form.Item>
-            <span>Arrival Date:</span>
+            <span className="formLable">Arrival Date:</span>
             <DatePicker
               disabledDate={disabledDate}
+              defaultValue={moment()} format={"YYYY/MM/DD"}
               onChange={this.handleArrivalDateChange}
             />
           </Form.Item>
           <Form.Item>
-            <span>Arrival Time:</span>
+            <span className="formLable">Arrival Time:</span>
             <TimePicker
               format={"HH:mm"}
               minuteStep={15}
@@ -120,33 +116,31 @@ class SearchArea extends Component {
             />
           </Form.Item>
           <Form.Item>
-            <span>Duration:</span>
+            <span className="formLable">Duration:</span>
             <Select
               placeholder="Dur. (hrs)"
+              defaultValue={1}
               style={{ width: 110 }}
               onChange={this.handleDurationChange}
             >
               {DURATION_DROPDOWN.map((duration_amount) => (
                 <Option key={"dur_" + duration_amount} value={duration_amount}>
-                  {duration_amount}
+                  {duration_amount} hour
                 </Option>
               ))}
             </Select>
           </Form.Item>
           <Form.Item>
-            <span>Car Type:</span>
-            <Radio.Group defaultValue="4-wheels" size="large" onChange={this.handleTypeChange} >
+            <span className="formLable">Car Type:</span>
+            <Radio.Group defaultValue="four wheels" size="large" onChange={this.handleTypeChange} >
               <div className="advanceSearchRadio">
                 <Radio.Button value="four wheels">
-                  {/* <CheckOutlined /> */}
                   4-Wheels
                 </Radio.Button>
                 <Radio.Button value="electric car">
-                  {/* <FilePdfOutlined /> */}
                   Electric Car
                 </Radio.Button>
                 <Radio.Button value="two wheels">
-                  {/* <FileJpgOutlined /> */}
                   Motor Bike
                 </Radio.Button>
               </div>

@@ -8,12 +8,17 @@
     margin-left: 20px;
 }
 
-.searchArea .ant-row span {
+.searchArea .formLable {
     margin-right: 8px;
 }
 
 .searchArea .ant-radio-button-wrapper {
     padding: 0;
+}
+
+.searchArea .ant-radio-button-wrapper span {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .searchArea .ant-btn {
@@ -22,4 +27,8 @@
 
 .searchArea .ant-btn span {
     margin: auto;
+}
+
+.searchArea .ant-radio-group-large .ant-radio-button-wrapper {
+    margin-right: 10px;
 }
