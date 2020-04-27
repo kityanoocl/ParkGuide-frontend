@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Radio, DatePicker, Form, Button, Switch, Select } from "antd";
+import { Radio, DatePicker, TimePicker, Form, Button, Select } from "antd";
 import { DURATION_DROPDOWN } from "../../constants/constants";
 import ParkGuideApi from "../../apis/ParkGuideApi";
 import {
@@ -17,21 +17,18 @@ class SearchArea extends Component {
     super(props);
 
     this.handleLocationChange = this.handleLocationChange.bind(this);
-    this.handleArrivalDateTimeChange = this.handleArrivalDateTimeChange.bind(
-      this
-    );
+    this.handleArrivalDateChange = this.handleArrivalDateChange.bind(this);
+    this.handleArrivalTimeChange = this.handleArrivalTimeChange.bind(this);
     this.handleDurationChange = this.handleDurationChange.bind(this);
-    this.handleAdvanceSearchOnChange = this.handleAdvanceSearchOnChange.bind(
-      this
-    );
     this.handleSearchOnClick = this.handleSearchOnClick.bind(this);
 
     this.state = {
-      isAdvance: false,
       locations: [],
       selectedLocation: "",
-      selectedArrivalDateTime: "",
+      selectedArrivalDate: "",
+      selectedArrivalTime: "",
       selectedDuration: 0,
+      selectedType: "",
       advancedSearchDisplay: "none",
     };
   }
@@ -46,25 +43,36 @@ class SearchArea extends Component {
     this.setState({ selectedLocation: value });
   }
 
-  handleArrivalDateTimeChange(date, dateString) {
+  handleArrivalDateChange(date, dateString) {
     console.log(date);
     console.log(dateString);
-    this.setState({ selectedArrivalDateTime: dateString });
+    this.setState({ selectedArrivalDate: dateString });
+  }
+
+  handleArrivalTimeChange(time, timeString) {
+    console.log(time);
+    console.log(timeString);
+    this.setState({ selectedArrivalTime: timeString });
   }
 
   handleDurationChange(value) {
     this.setState({ selectedDuration: value });
   }
 
-  handleAdvanceSearchOnChange(checked) {
-    this.setState({
-      isAdvance: checked ? true : false,
-      advancedSearchDisplay: checked ? "flex" : "none",
-    });
-  }
-
   handleSearchOnClick() {
-    this.props.searchParkingSLots(this.state);
+    let startMoment = moment(this.state.selectedArrivalDate + " " + this.state.selectedArrivalTime);
+    let endMoment = startMoment.add(this.state.selectedDuration, 'hours');
+    const DATE_FORMAT = "YYYY-MM-DD hh:mm:ss";
+    console.log(startMoment.format(DATE_FORMAT));
+
+    const params = {
+      location: this.state.selectedLocation,
+      startTime: startMoment.format(DATE_FORMAT),
+      endTime: endMoment.format(DATE_FORMAT),
+      type: this.state.selectedType,
+    };
+
+    this.props.searchParkingSLots(params);
   }
 
   render() {
@@ -91,13 +99,18 @@ class SearchArea extends Component {
             </Select>
           </Form.Item>
           <Form.Item>
-            <span>Arrival DateTime:</span>
+            <span>Arrival Date:</span>
             <DatePicker
               disabledDate={disabledDate}
-              showTime={{
-                defaultValue: moment(moment().format("hh:mm:ss"), "HH:mm:ss"),
-              }}
-              onChange={this.handleArrivalDateTimeChange}
+              onChange={this.handleArrivalDateChange}
+            />
+          </Form.Item>
+          <Form.Item>
+            <span>Arrival Time:</span>
+            <TimePicker
+              format={"HH:mm"}
+              minuteStep={15}
+              onChange={this.handleArrivalTimeChange}
             />
           </Form.Item>
           <Form.Item>
@@ -115,10 +128,7 @@ class SearchArea extends Component {
             </Select>
           </Form.Item>
           <Form.Item>
-            <span>Advanced search:</span>
-            <Switch onChange={this.handleAdvanceSearchOnChange} />
-          </Form.Item>
-          <Form.Item style={{ display: this.state.advancedSearchDisplay }}>
+            <span>Car Type:</span>
             <Radio.Group defaultValue="a" size="large">
               <div className="advanceSearchRadio">
                 <Radio.Button value="electric">
