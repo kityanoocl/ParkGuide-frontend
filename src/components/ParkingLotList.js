@@ -28,7 +28,6 @@ class ParkingLotList extends Component {
             id={parkingLot.id}
             name={parkingLot.name}
             location={parkingLot.location}
-            removeTodo={this.removeTodo}
           />
         ))}
       </div>
