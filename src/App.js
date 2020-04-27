@@ -4,7 +4,7 @@ import { Layout} from "antd";
 import { CarOutlined } from "@ant-design/icons";
 import HomePageContainer from "./components/HomePageContainer";
 import SearchPageContainer from "./components/SearchPageContainer";
-import { Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch, NavLink } from "react-router-dom";
 import LoginPage from "./components/LoginPage"
 import RegisterPage from "./components/RegisterPage";
 import UserProfile from "./components/UserProfile";
@@ -40,8 +40,8 @@ export default class App extends Component {
     <div className="App">
       <Router history={history}>
         <Layout className="layout">
-          <Header className="layoutHeader">
-            <CarOutlined className="headerLogo" />
+          <Header className="layoutHeader" >  
+            <CarOutlined className="headerLogo"/>
             <NavigationBar isLoggedIn={this.state.isLoggedIn}
             name={this.state.name} userID={this.state.userID}/>
 

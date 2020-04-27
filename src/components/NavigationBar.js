@@ -14,16 +14,22 @@ export default class NavigationBar extends Component {
 
     }
 
+onClick(){
+    window.location.reload()
+}
 
     render() {
-        const { name } = this.props;
-        const userLink = name ? "/UserProfile/" + this.props.userID : "/LoginPage";
+        console.log(this.props.isLoggedIn)
+        const { name } = this.props
+        const userLink = name ? "/UserProfile/" + this.props.userID : "/LoginPage"
+
         return (
             <div className="loginAndRegister">
                 <Space>
                     <Button><NavLink to="/"> Home </NavLink></Button>
                     <Button><NavLink to={userLink}> {name ? name : 'Login'}</NavLink></Button>
-                    <Button><NavLink to="/RegisterPage"> {name ? 'Logout' : ''} </NavLink></Button>
+                    {name ? <Button onClick={this.onClick}><NavLink to="/"> Logout </NavLink></Button> : '' }
+                    
                 </Space>
 
             </div>
