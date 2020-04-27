@@ -13,6 +13,8 @@ class SearchResult extends Component {
             location={parkingLot.location}
             vacancy={parkingLot.vacancy}
             price={30}
+            openBookingModal={this.props.openModal}
+            setModalContent={this.props.setModalContent}
           />
         ))}
       </div>
