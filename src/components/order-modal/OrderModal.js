@@ -1,27 +1,28 @@
 import React, { Component } from "react";
-import { Modal } from 'antd';
+import { Modal, Typography } from 'antd';
 
+const { Text } = Typography;
 class OrderModal extends Component {
     constructor(props) {
         super(props);
         
-        this.state = {
-            
-        }
     }
 
   render() {
     return (
       <Modal
-        title="Vertically centered modal dialog"
+        title={this.props.modalContent.name}
         centered
         visible={this.props.modalVisible}
         onOk={() => {console.log("Should redirect")}}
         onCancel={this.props.closeModal}
+        okText={"Place Order"}
       >
-        <p>some contents...</p>
-        <p>some contents...</p>
-        <p>some contents...</p>
+        <Text>Location: {this.props.modalContent.location}</Text><br/>
+        <Text>Available Slot: {this.props.modalContent.vacancy}</Text><br/>
+        <Text>Time: {this.props.userCriteria.startTime} to {this.props.userCriteria.endTime}</Text><br/>
+        <Text>Car Type: {this.props.userCriteria.type}</Text><br/>
+        <Text>Total Price: ${this.props.modalContent.price * this.props.userCriteria.duration}</Text>
       </Modal>
     );
   }

@@ -16,6 +16,7 @@ class SearchPageContainer extends Component {
       results: [],
       modalVisible: false,
       modalContent: {},
+      userCriteria: {}
     };
   }
 
@@ -24,20 +25,30 @@ class SearchPageContainer extends Component {
   }
   searchParkingSLots(params) {
     ParkGuideApi.getParkingSlots(params).then((response) => {
-      this.setState({ results: response.data });
+      this.setState({ 
+        results: response.data,
+        userCriteria: params
+      });
     });
   }
 
   setModalContent = (modalContent) => {
-      this.setState({modalContent});
+    console.log(modalContent);
+    this.setState({modalContent});
   }
+
   render() {
     return (
       <div id="SearchPageContainer">
         <SearchArea searchParkingSLots={this.searchParkingSLots} />
         <Divider />
         <SearchResult results={this.state.results} openModal={() => this.setModalVisible(true)} setModalContent={this.setModalContent}/>
-        <OrderModal modalVisible={this.state.modalVisible} closeModal={() => this.setModalVisible(false)} modalContent={this.state.modalContent}/>
+        <OrderModal 
+          modalVisible={this.state.modalVisible} 
+          closeModal={() => this.setModalVisible(false)} 
+          modalContent={this.state.modalContent}
+          userCriteria={this.state.userCriteria}
+        />
       </div>
     );
   }

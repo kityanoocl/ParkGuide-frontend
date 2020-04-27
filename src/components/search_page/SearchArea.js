@@ -75,6 +75,7 @@ class SearchArea extends Component {
       startTime: startMoment.format(DATE_FORMAT),
       endTime: endMoment.format(DATE_FORMAT),
       type: this.state.selectedType,
+      duration: this.state.selectedDuration,
     };
 
     this.props.searchParkingSLots(params);
