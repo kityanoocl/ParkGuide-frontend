@@ -33,9 +33,7 @@ export default class Facebook extends Component {
                 if (response.data.carLicense != null) {
                     this.setState({
                         userCarLicense: response.data.carLicense
-
                     })
-                    // console.log(response.data.carLicense)
                 }
             })
 
