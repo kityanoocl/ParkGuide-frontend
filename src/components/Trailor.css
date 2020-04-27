@@ -1,0 +1,11 @@
+.ant-carousel .slick-slide {
+  text-align: center;
+  height: 300px;
+  line-height: 300px;
+  overflow: hidden;
+}
+
+.trailor img {
+  max-height: 400px;
+  object-fit: contain;
+}

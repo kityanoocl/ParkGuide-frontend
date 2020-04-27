@@ -1,0 +1,26 @@
+.searchForm {
+  min-width: 500px;
+  float: right;
+  margin-right: 60px;
+  margin-bottom: 30px;
+}
+
+.resultButton {
+  float: right;
+}
+
+.advanceSearchRadio > .ant-radio-button-wrapper {
+  min-height: auto;
+  max-width: auto;
+  display: inline-flex;
+  margin-right: 10px;
+}
+
+.advanceSearchRadio > .ant-radio-button-wrapper img {
+  width: 100%;
+  height: 100%;
+}
+
+.formArea > div {
+  width: 300px;
+}

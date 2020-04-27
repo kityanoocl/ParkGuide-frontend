@@ -1,0 +1,7 @@
+.formArea {
+  width: 100%;
+  min-height: 400px;
+  padding-top: 50px;
+  background: url("../img/banner.png");
+  background-repeat: no-repeat;
+}
