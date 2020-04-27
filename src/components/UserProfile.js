@@ -82,9 +82,11 @@ export default class UserProfile extends Component {
     }
 
 
+    
 
     render() {
         const { carLicense, location, fullName, membershipLevel, credit } = this.state
+        
         return (
             <div>
                 <h2>User Profile</h2>

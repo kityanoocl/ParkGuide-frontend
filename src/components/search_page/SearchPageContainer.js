@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Divider } from "antd";
+import { Divider, Button } from "antd";
 import SearchArea from "./SearchArea";
 import SearchResult from "./SearchResult";
 import ParkGuideApi from "../../apis/ParkGuideApi";
 import OrderModal from '../order-modal/OrderModal';
 import Facebook from "../Facebook";
+import { NavLink } from "react-router-dom";
 
 class SearchPageContainer extends Component {
   constructor(props) {
@@ -59,7 +60,9 @@ class SearchPageContainer extends Component {
     } else {
       searchPageContent = (
         <div>
-          <Facebook />
+          <p>Please login to continue</p>
+          <br></br>
+          <Button><NavLink to="/LoginPage">Click here to proceed</NavLink></Button>
         </div>
       )
     }
