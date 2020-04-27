@@ -3,15 +3,16 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import "antd/dist/antd.css";
-import { Layout, Space } from "antd";
+import { Button, Layout, Space } from "antd";
 import HomePageContainer from "./components/HomePageContainer";
-import SearchPageContainer from "./components/SearchPageContainer";
+import SearchPageContainer from "./components/search_page/SearchPageContainer";
 import { CarOutlined } from "@ant-design/icons";
-import { Router, Route, NavLink, Switch } from "react-router-dom";
+import { Router, Route, Link, NavLink, Switch } from "react-router-dom";
 import LoginPage from "./components/LoginPage"
 import RegisterPage from "./components/RegisterPage";
 import UserProfile from "./components/UserProfile";
 import history from './history';
+
 const { Header, Content, Footer } = Layout;
 
 
@@ -20,12 +21,13 @@ ReactDOM.render(
     <Router history={history}>
       <Layout className="layout">
         <Header className="layoutHeader">
+          <Link to="/">
           <CarOutlined className="headerLogo" />
+          </Link>
           <div className="loginAndRegister">
             <Space>
-            <NavLink to="/"> Home </NavLink>
-            <NavLink to="/LoginPage"> Login </NavLink>
-            <NavLink to="/RegisterPage"> Register </NavLink>
+            <NavLink to="/LoginPage"><Button type="primary">Login</Button></NavLink>
+            <NavLink to="/RegisterPage"><Button>Register</Button></NavLink>
             </Space>
           </div> 
         </Header>
@@ -36,7 +38,6 @@ ReactDOM.render(
           <Route path="/LoginPage" component={LoginPage} />
           <Route path="/RegisterPage" component={RegisterPage} />
           <Route path="/UserProfile/:userParam" component={UserProfile} />
-          {/* <Route path="/user-profile" component={} /> */}
           </Switch>
         </Content>
         <Footer id="layoutFooter" style={{ textAlign: "center" }}>

@@ -1,0 +1,25 @@
+.searchArea .ant-form {
+    display: inline-block;
+    min-width: 100%;
+}
+
+.searchArea .ant-row {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.searchArea .ant-row span {
+    margin-right: 8px;
+}
+
+.searchArea .ant-radio-button-wrapper {
+    padding: 0;
+}
+
+.searchArea .ant-btn {
+    margin-left: 30px;
+}
+
+.searchArea .ant-btn span {
+    margin: auto;
+}

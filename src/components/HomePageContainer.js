@@ -6,7 +6,7 @@ import { Divider } from "antd";
 class HomePageContainer extends Component {
   render() {
     return (
-      <div className="HomePageContainer">
+      <div id="HomePageContainer">
         <Banner />
         <Divider className="divider" />
         <ParkingLotList />
