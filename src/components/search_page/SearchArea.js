@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Radio, DatePicker, TimePicker, Form, Button, Select } from "antd";
 import { DURATION_DROPDOWN } from "../../constants/constants";
 import ParkGuideApi from "../../apis/ParkGuideApi";
-import {
-  CheckOutlined,
-  FilePdfOutlined,
-  FileJpgOutlined,
-} from "@ant-design/icons";
+// import {
+//   CheckOutlined,
+//   FilePdfOutlined,
+//   FileJpgOutlined,
+// } from "@ant-design/icons";
 import "./SearchArea.css";
 import moment from "moment";
 
@@ -20,6 +20,7 @@ class SearchArea extends Component {
     this.handleArrivalDateChange = this.handleArrivalDateChange.bind(this);
     this.handleArrivalTimeChange = this.handleArrivalTimeChange.bind(this);
     this.handleDurationChange = this.handleDurationChange.bind(this);
+    this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleSearchOnClick = this.handleSearchOnClick.bind(this);
 
     this.state = {
@@ -59,9 +60,13 @@ class SearchArea extends Component {
     this.setState({ selectedDuration: value });
   }
 
+  handleTypeChange(event) {
+    this.setState({ selectedType: event.target.value });
+  }
+
   handleSearchOnClick() {
-    let startMoment = moment(this.state.selectedArrivalDate + " " + this.state.selectedArrivalTime);
-    let endMoment = startMoment.add(this.state.selectedDuration, 'hours');
+    const startMoment = moment(this.state.selectedArrivalDate + " " + this.state.selectedArrivalTime);
+    const endMoment = moment(this.state.selectedArrivalDate + " " + this.state.selectedArrivalTime).add(this.state.selectedDuration, 'hours');
     const DATE_FORMAT = "YYYY-MM-DD hh:mm:ss";
     console.log(startMoment.format(DATE_FORMAT));
 
@@ -129,16 +134,19 @@ class SearchArea extends Component {
           </Form.Item>
           <Form.Item>
             <span>Car Type:</span>
-            <Radio.Group defaultValue="a" size="large">
+            <Radio.Group defaultValue="4-wheels" size="large" onChange={this.handleTypeChange} >
               <div className="advanceSearchRadio">
-                <Radio.Button value="electric">
-                  <CheckOutlined />
+                <Radio.Button value="four wheels">
+                  {/* <CheckOutlined /> */}
+                  4-Wheels
                 </Radio.Button>
-                <Radio.Button value="motor">
-                  <FilePdfOutlined />
+                <Radio.Button value="electric car">
+                  {/* <FilePdfOutlined /> */}
+                  Electric Car
                 </Radio.Button>
-                <Radio.Button value="disability">
-                  <FileJpgOutlined />
+                <Radio.Button value="two wheels">
+                  {/* <FileJpgOutlined /> */}
+                  Motor Bike
                 </Radio.Button>
               </div>
             </Radio.Group>
