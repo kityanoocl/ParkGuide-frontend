@@ -5,7 +5,8 @@ export default class LoginPage extends Component {
     render() {
         return (
             <div>
-                <Facebook/>
+                <Facebook onLogin={this.props.onLogin}/>
+
             </div>
         )
     }

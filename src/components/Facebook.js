@@ -4,6 +4,7 @@ import axios from 'axios'
 import { NavLink } from "react-router-dom";
 import { Input, Button, Form } from 'antd'
 import history from './../history';
+import NavigationBar from './NavigationBar';
 
 export default class Facebook extends Component {
     constructor(props) {
@@ -76,15 +77,16 @@ export default class Facebook extends Component {
                 })
         }
 
-
-        history.push("/UserProfile/" + this.state.userID)
-        window.location.reload();
+        history.push("/")
+        // history.push("/UserProfile/" + this.state.userID)
+        // window.location.reload();
 
         // this.context.history.push('/RegisterPage')
 
     }
 
     responseFacebook = response => {
+
         this.setState({
             isLoggedIn: true,
             userID: response.userID,
@@ -92,6 +94,12 @@ export default class Facebook extends Component {
             email: response.email,
             picture: response.picture.data.url,
 
+        })
+
+        this.props.onLogin({
+            isLoggedIn: true,
+            name: response.name,
+            userID: response.userID
         })
     }
 
@@ -112,11 +120,14 @@ export default class Facebook extends Component {
                         margin: 'auto',
                         padding: '20px'
                     }}>
+                        {/* <img src={this.state.picture} alt={this.state.name}/> */}
 
                         <h2>Welcome {this.state.name}</h2>
 
                         <p>Your car license : {this.state.userCarLicense}</p>
-                        <NavLink to={"/UserProfile/" + this.state.userID}> User Profile </NavLink>
+                        <Button><NavLink to={"/UserProfile/" + this.state.userID}> User Profile </NavLink></Button>
+                        <br></br><br></br>
+                        <Button><NavLink to="/"> Reserve Parking Lots </NavLink></Button>
 
                     </div>
                 )
@@ -127,7 +138,8 @@ export default class Facebook extends Component {
                         margin: 'auto',
                         padding: '20px'
                     }}>
-                        <h2>Please input the followings to proceed</h2>
+                        <h3>Welcome! Please input the followings to proceed</h3>
+                        <br></br>
                         <Form labelCol={{
                             span: 4,
                         }}
@@ -136,13 +148,13 @@ export default class Facebook extends Component {
                             }}
                             layout="horizontal">
 
-                            <Form.Item label="Your car license: ">
+                            <Form.Item label="* Your car license: ">
                                 <Input required autoComplete="off" name="carLicense" value={carLicense}
                                     onChange={this.onChange}
                                     type="text" placeholder="Your car license"></Input>
                             </Form.Item>
 
-                            <Form.Item label="Preferred location: ">
+                            <Form.Item label="* Preferred location: ">
                                 <Input required autoComplete="off" name="location" value={location}
                                     onChange={this.onChange}
                                     type="text" placeholder="Your preferred location"></Input>
@@ -167,10 +179,11 @@ export default class Facebook extends Component {
 
             fbContent = (
                 <div>
-                    <p>Click to login</p>
+                    <h3>To get started, authenticate with Facebook</h3>
+                    <br></br>
                     <FacebookLogin
                         appId="667513370492031"
-                        autoLoad={true}
+                        autoLoad={false}
                         fields="name,email,picture"
                         onClick={this.componentClicked}
                         callback={this.responseFacebook} />
@@ -182,7 +195,9 @@ export default class Facebook extends Component {
 
         return (
             <div>
-                <div>{fbContent}</div>
+                <div>
+                    {fbContent}</div>
+                {/* <NavigationBar name={this.state.name} /> */}
 
             </div>
 

@@ -85,7 +85,7 @@ export default class UserProfile extends Component {
         const { carLicense, location, fullName, membershipLevel } = this.state
         return (
             <div>
-                <h1>This is a user profile</h1>
+                <h2>User Profile</h2>
                 {this.props.value}
                 <Form labelCol={{
                     span: 4,
