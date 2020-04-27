@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card } from "antd";
+import { Button, Card } from "antd";
 
 class ParkingSlot extends Component {
   constructor(props) {
@@ -14,10 +14,14 @@ class ParkingSlot extends Component {
 
   render() {
     return (
-      <Card className="parkingLotCard" bordered={false}>
+      <Card className="parkingCard" bordered={false}>
         <div className="cardContent">
-          <span>{this.state.name}</span>
-          <p>{this.state.location}</p>
+          <p>{this.state.name}</p>
+          <p>Location: {this.state.location}</p>
+          <p>Cost: $30/hour</p>
+          <p>Space available: 5 left</p>
+          <p>Distance: 35 m</p>
+          <Button type="primary" shape="round" size="Default">Book Now</Button>
         </div>
       </Card>
     );

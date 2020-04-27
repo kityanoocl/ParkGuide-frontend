@@ -14,7 +14,7 @@ class ParkingLot extends Component {
 
   render() {
     return (
-      <Card className="parkingLotCard" bordered={false}>
+      <Card className="parkingCard" bordered={false}>
         <div className="cardContent">
           <span>{this.state.name}</span>
           <p>{this.state.location}</p>
