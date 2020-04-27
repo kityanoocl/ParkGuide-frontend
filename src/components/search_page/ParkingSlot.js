@@ -9,6 +9,8 @@ class ParkingSlot extends Component {
       id: this.props.id,
       name: this.props.name,
       location: this.props.location,
+      vacancy: this.props.vacancy,
+      price: this.props.price,
     };
   }
 
@@ -18,9 +20,8 @@ class ParkingSlot extends Component {
         <div className="cardContent">
           <p>{this.state.name}</p>
           <p>Location: {this.state.location}</p>
-          <p>Cost: $30/hour</p>
-          <p>Space available: 5 left</p>
-          <p>Distance: 35 m</p>
+          <p>Cost: ${this.state.price}/hour</p>
+          <p>Space available: {this.state.vacancy < 10 ? this.state.vacancy : "Many "} left</p>
           <Button type="primary" shape="round" size="Default">Book Now</Button>
         </div>
       </Card>

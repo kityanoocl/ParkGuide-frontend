@@ -11,6 +11,8 @@ class SearchResult extends Component {
             id={parkingLot.id}
             name={parkingLot.name}
             location={parkingLot.location}
+            vacancy={parkingLot.vacancy}
+            price={30}
           />
         ))}
       </div>

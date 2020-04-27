@@ -18,7 +18,8 @@ class SearchPageContainer extends Component {
   searchParkingSLots(form) {
     console.log(form);
     const params = {
-        location: form.location,
+        location: form.selectedLocation,
+        // type: "electric car",
     };
     ParkGuideApi.getParkingSlots(params).then((response) => {
       this.setState({ results: response.data });
