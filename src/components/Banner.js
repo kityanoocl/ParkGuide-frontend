@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Typography, Row, Col } from 'antd';
-
+import { NavLink } from "react-router-dom";
 import logo from '../img/banner.png'
 const { Text } = Typography;
 class Banner extends Component {
@@ -9,28 +9,23 @@ class Banner extends Component {
       <React.Fragment>
         <div className="formArea">
           {/* <SearchFilterForm /> */}
-          <Row justify="space-between" align="middle">
-            <Col span={12}>
+          <Row justify="space-around" align="middle">
+            <Col span={10}>
               <img src={logo} alt="app loco" height="300px" />
             </Col>
-            <Col height="100%" span={12}>
+            <Col height="100%" span={10}>
               <Row gutter={[0, 40]}>
                 <Text>
-                  Suppl. Table 4. Mouse circRNA summary
-                  chr,start,end,strand: coordinates in mm10 annotation
-                  Annotation: NTO: intergenic; CTO: complete transcript overlap; AS: antisense; ITO: incomplete transcript overlap; ncRNA: non-coding RNA; INTRONIC: intronic; CDS,5UTR,3UTR: overlaps coding sequence, 5'UTR or 3'UTR; ANNOTATED: splice sites are annotated; ALT_DONOR, ALT_ACCEPTOR: not annotated splice donor or acceptor site
-                  nExons: number of exons
-                  length: predicted length
-                  rawCounts: raw counts of backsplice-spanning reads in all samples in the same order as the preceding column names
-                  allSHAM,allTAC: detected in all SHAM_mock or all TAC_mock with >=3 reads
-                  rnoCircIndex, hsaCircIndex: index of rat,human homolog, if found
-                  Normalized sample counts are given as backsplice-spanning reads per million uniquely aligned unspliced reads (RPM)
+                What is Lorem Ipsum?
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                 </Text>
               </Row>
               <Row justify="center">
+                <NavLink to="/search">
                 <Button className="resultButton" type="primary" style={{ borderRadius: "7px" }}>
                   Let's Search
                 </Button>
+                </NavLink>
               </Row>
 
             </Col>
