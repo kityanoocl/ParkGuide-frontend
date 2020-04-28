@@ -18,6 +18,7 @@ class SearchResult extends Component {
             setModalContent={this.props.setModalContent}
             parkingLot={parkingLot}
             slotId={parkingLot.parkingSlots[0].id}
+            userID={this.props.userID}
           />
         ))}
       </div>

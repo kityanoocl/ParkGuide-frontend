@@ -8,6 +8,7 @@ import { Router, Route, Switch, NavLink } from "react-router-dom";
 import LoginPage from "./components/LoginPage"
 import UserProfile from "./components/UserProfile";
 import UserOrders from "./components/UserOrders";
+import ParkingSlot from "./components/search_page/ParkingSlot"
 import history from './history';
 import NavigationBar from "./components/NavigationBar";
 const { Header, Content, Footer } = Layout;
@@ -52,10 +53,11 @@ export default class App extends Component {
             <Content className="layoutContent">
               <Switch>
                 <Route exact={true} path="/" component={HomePageContainer} />
-                <Route path="/search" render={(props) => <SearchPageContainer {...props} isLoggedIn={this.state.isLoggedIn} />} />
+                <Route path="/search" render={(props) => <SearchPageContainer {...props} isLoggedIn={this.state.isLoggedIn} userID={this.state.userID}/>} />
                 <Route path="/LoginPage" render={(props) => <LoginPage {...props} onLogin={this.onLogin} />} />
                 <Route path="/UserProfile/:userParam" component={UserProfile} />
                 <Route path="/UserOrders/:userParam" component={UserOrders} />
+
               </Switch>
             </Content>
             <Footer id="layoutFooter" style={{ textAlign: "center" }}>

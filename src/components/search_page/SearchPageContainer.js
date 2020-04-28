@@ -39,6 +39,7 @@ class SearchPageContainer extends Component {
   }
 
   render() {
+    console.log(this.props.userID)
     let searchPageContent
     console.log(this.props.isLoggedIn)
 
@@ -47,12 +48,14 @@ class SearchPageContainer extends Component {
         <div id="SearchPageContainer">
           <SearchArea searchParkingSLots={this.searchParkingSLots} />
           <Divider />
-          <SearchResult results={this.state.results} type={this.state.userCriteria.type} openModal={() => this.setModalVisible(true)} setModalContent={this.setModalContent} />
+          <SearchResult results={this.state.results} type={this.state.userCriteria.type} openModal={() => this.setModalVisible(true)} setModalContent={this.setModalContent} 
+          userID={this.props.userID}/>
           <OrderModal
             modalVisible={this.state.modalVisible}
             closeModal={() => this.setModalVisible(false)}
             modalContent={this.state.modalContent}
             userCriteria={this.state.userCriteria}
+            userID={this.props.userID}
           />
         </div>
       )

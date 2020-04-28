@@ -53,11 +53,16 @@ export default class UserOrders extends Component {
                 //.then(response => console.log(response.data))
                 .then(response => {
                     if (response.data != null) {
+                        const updatedOrders = this.state.userOrders.map((order) => {
+                            if(order.orderId === userOrderId) {
+                                return response.data
+                            }
+                            return order
+                        })
                         this.setState({
-                            status: 'Cancelled'
+                            userOrders: updatedOrders
                         })
                         alert("Booking cancelled successfully")
-                        window.location.reload()
                     }
                 })
         }

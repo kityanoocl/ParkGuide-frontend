@@ -18,7 +18,7 @@ class ParkingSlot extends Component {
   }
 
   componentDidMount() {
-    ParkGuideApi.postRetrieveDiscounts("00000001", this.props.id, this.props.type).then((response) => {
+    ParkGuideApi.postRetrieveDiscounts(this.props.userID, this.props.id, this.props.type).then((response) => {
       this.setState({discounts: response.data});
     });
   }
@@ -38,6 +38,7 @@ class ParkingSlot extends Component {
     this.props.openBookingModal();
   }
   render() {
+    console.log("ParkingSlot..." + this.props.userID)
     return (
       <Card className="parkingCard" bordered={false}>
         <div className="cardContent">

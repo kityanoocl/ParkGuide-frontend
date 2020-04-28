@@ -25,7 +25,7 @@ class OrderModal extends Component {
 
   placeOrder() {
     ParkGuideApi.postOrder(
-      "00000001",
+      this.props.userID,
       this.props.modalContent.id,
       this.props.modalContent.slotId,
       this.state.discountId,
@@ -165,6 +165,7 @@ class OrderModal extends Component {
   }
 
   render() {
+    console.log("OrderModal..." + this.props.userID)
     return this.renderHTML();
   }
 }
