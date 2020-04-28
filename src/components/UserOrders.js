@@ -76,7 +76,8 @@ export default class UserOrders extends Component {
                 <p><b>Parking lot type: </b> {order.parkingSlotType}</p>
                 <p><b>Start time: </b> {order.parkingStartTime}</p>
                 <p><b>End time: </b> {order.parkingEndTime}</p>
-                <p><b>Price: $</b>{order.price} <Button danger>{order.discountContent}</Button></p>
+                <p><b>Price: </b>${order.price} <Button danger>{order.discountContent}</Button></p>
+                <p><b>Earned credit: </b>{order.earnedCredit}</p>
                 <p><b>Order status: </b>{order.status} <Button onClick={() => this.onClick(order.orderId)}>Cancel order</Button></p>
 
                 <Divider />
