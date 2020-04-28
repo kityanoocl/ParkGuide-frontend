@@ -13,9 +13,11 @@ class SearchResult extends Component {
             location={parkingLot.location}
             vacancy={parkingLot.vacancy}
             price={30}
+            type={this.props.type}
             openBookingModal={this.props.openModal}
             setModalContent={this.props.setModalContent}
             parkingLot={parkingLot}
+            slotId={parkingLot.parkingSlots[0].id}
           />
         ))}
       </div>

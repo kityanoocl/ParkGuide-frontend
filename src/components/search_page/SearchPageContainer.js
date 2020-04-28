@@ -23,6 +23,7 @@ class SearchPageContainer extends Component {
   setModalVisible = (visible) => {
       this.setState({modalVisible: visible})
   }
+
   searchParkingSLots(params) {
     ParkGuideApi.getParkingSlots(params).then((response) => {
       this.setState({ 
@@ -33,7 +34,6 @@ class SearchPageContainer extends Component {
   }
 
   setModalContent = (modalContent) => {
-    console.log(modalContent);
     this.setState({modalContent});
   }
 
@@ -42,7 +42,7 @@ class SearchPageContainer extends Component {
       <div id="SearchPageContainer">
         <SearchArea searchParkingSLots={this.searchParkingSLots} />
         <Divider />
-        <SearchResult results={this.state.results} openModal={() => this.setModalVisible(true)} setModalContent={this.setModalContent}/>
+        <SearchResult results={this.state.results} type={this.state.userCriteria.type} openModal={() => this.setModalVisible(true)} setModalContent={this.setModalContent}/>
         <OrderModal 
           modalVisible={this.state.modalVisible} 
           closeModal={() => this.setModalVisible(false)} 
