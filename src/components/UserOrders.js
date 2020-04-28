@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Divider, Typography, Button} from 'antd'
+import { Divider, Typography, Button } from 'antd'
 const { Text } = Typography;
 
 export default class UserOrders extends Component {
@@ -8,8 +8,12 @@ export default class UserOrders extends Component {
         super(props)
 
         this.state = {
-            userOrders: []
+            userOrders: [],
+            orderId: '',
+            status: ''
         }
+
+        this.onClick = this.onClick.bind(this)
     }
 
     componentDidMount() {
@@ -17,20 +21,49 @@ export default class UserOrders extends Component {
         console.log('orders   ' + userParam);
 
         axios.get("http://CHIURE-w10-3:8082/rest/parkguide/orders/" + userParam)
-            .then(response => response.data)
-            .then(data => {
+
+            .then(response => {
+                const data = response.data;
+               console.log("did moount", data)
                 this.setState({
-                    userOrders: data
+                    userOrders: data,
+                    orderId: data.orderId
+                }, () => {
+                    console.log(data)
+                    console.log(this.state.orderId)
                 })
-                console.log(data)
-                console.log(this.state.userOrders)
+               
             })
-
-        // axios.get("http://CHIURE-w10-3:8082/rest/parkguide/parking-lots/")
-        //     .then(response => response.data)
-
+           
     }
 
+    onClick(userOrderId) {
+        console.log("click...", userOrderId)
+
+        const findOrder = this.state.userOrders.find(element => element.orderId === userOrderId);
+        const orderId = findOrder.orderId
+        const orderStatus = findOrder.status
+        console.log(orderStatus)
+
+        if (orderStatus === 'Cancelled') {
+            alert("Booking is already cancelled")
+        } else {
+
+            axios.put("http://CHIURE-w10-3:8082/rest/parkguide/orders/" + orderId)
+                //.then(response => console.log(response.data))
+                .then(response => {
+                    if (response.data != null) {
+                        this.setState({
+                            status: 'Cancelled'
+                        })
+                        alert("Booking cancelled successfully")
+                        window.location.reload()
+                    }
+                })
+        }
+
+
+    }
 
     listItems = () =>
         this.state.userOrders.map(order => (
@@ -42,9 +75,9 @@ export default class UserOrders extends Component {
                 <p><b>Start time: </b> {order.parkingStartTime}</p>
                 <p><b>End time: </b> {order.parkingEndTime}</p>
                 <p><b>Price: $</b>{order.price} <Button danger>{order.discountContent}</Button></p>
-                <p><b>Order status: </b>{order.status}</p>
-                
-                <Divider/>
+                <p><b>Order status: </b>{order.status} <Button onClick={() => this.onClick(order.orderId) }>Cancel order</Button></p>
+
+                <Divider />
             </div>
         ));
 
@@ -52,7 +85,7 @@ export default class UserOrders extends Component {
 
         return (
             <div>
-                <h2>Your have {this.state.userOrders.length} orders </h2>
+                <h2>Your have {this.state.userOrders.length} order(s) </h2>
                 <p>{this.listItems()}</p>
             </div>
         )
