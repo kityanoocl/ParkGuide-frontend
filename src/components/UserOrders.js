@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Divider, Typography} from 'antd'
+import {Divider, Typography, Button} from 'antd'
 const { Text } = Typography;
 
 export default class UserOrders extends Component {
@@ -41,6 +41,7 @@ export default class UserOrders extends Component {
                 <p><b>Parking lot type: </b> {order.parkingSlotType}</p>
                 <p><b>Start time: </b> {order.parkingStartTime}</p>
                 <p><b>End time: </b> {order.parkingEndTime}</p>
+                <p><b>Price: $</b>{order.price} <Button danger>{order.discountContent}</Button></p>
                 <p><b>Order status: </b>{order.status}</p>
                 
                 <Divider/>
