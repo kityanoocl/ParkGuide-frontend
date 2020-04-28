@@ -4,7 +4,6 @@ import SearchArea from "./SearchArea";
 import SearchResult from "./SearchResult";
 import ParkGuideApi from "../../apis/ParkGuideApi";
 import OrderModal from '../order-modal/OrderModal';
-import Facebook from "../Facebook";
 import { NavLink } from "react-router-dom";
 
 class SearchPageContainer extends Component {
