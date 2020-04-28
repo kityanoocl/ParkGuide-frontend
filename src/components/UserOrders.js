@@ -24,7 +24,7 @@ export default class UserOrders extends Component {
 
             .then(response => {
                 const data = response.data;
-               console.log("did moount", data)
+                console.log("did moount", data)
                 this.setState({
                     userOrders: data,
                     orderId: data.orderId
@@ -32,9 +32,9 @@ export default class UserOrders extends Component {
                     console.log(data)
                     console.log(this.state.orderId)
                 })
-               
+
             })
-           
+
     }
 
     onClick(userOrderId) {
@@ -65,17 +65,19 @@ export default class UserOrders extends Component {
 
     }
 
+
     listItems = () =>
         this.state.userOrders.map(order => (
             <div className="card">
-                <p><b>Order Id: </b>000000000{order.orderId}</p>
+                <p><b>Order Id: </b> {("00000000" + order.orderId).slice(-8)
+                }</p>
                 <p><b>Parking lot name: </b>{order.parkingLotName}</p>
                 <p><b>Parking lot location: </b> {order.parkingLotLocation}</p>
                 <p><b>Parking lot type: </b> {order.parkingSlotType}</p>
                 <p><b>Start time: </b> {order.parkingStartTime}</p>
                 <p><b>End time: </b> {order.parkingEndTime}</p>
                 <p><b>Price: $</b>{order.price} <Button danger>{order.discountContent}</Button></p>
-                <p><b>Order status: </b>{order.status} <Button onClick={() => this.onClick(order.orderId) }>Cancel order</Button></p>
+                <p><b>Order status: </b>{order.status} <Button onClick={() => this.onClick(order.orderId)}>Cancel order</Button></p>
 
                 <Divider />
             </div>
