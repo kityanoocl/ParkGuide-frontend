@@ -1,17 +1,28 @@
 import React, { Component } from "react";
 import { Button, Card } from "antd";
+import ParkGuideApi from "../../apis/ParkGuideApi";
 
 class ParkingSlot extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       id: this.props.id,
       name: this.props.name,
       location: this.props.location,
       vacancy: this.props.vacancy,
       price: this.props.price,
+      discounts: [],
+      slotId: this.props.slotId,
     };
   }
+
+  componentDidMount() {
+    ParkGuideApi.postRetrieveDiscounts("00000001", this.props.id, this.props.type).then((response) => {
+      this.setState({discounts: response.data});
+    });
+  }
+
   openModalAndSetContent = () => {
     const content = {
         id: this.props.id,
@@ -19,7 +30,9 @@ class ParkingSlot extends Component {
         location: this.props.location,
         vacancy: this.props.vacancy,
         price: this.props.price,
-        parkingLotInfo: this.props.parkingLot
+        parkingLotInfo: this.props.parkingLot,
+        discounts:this.state.discounts,
+        slotId: this.state.slotId,
     }
     this.props.setModalContent(content);
     this.props.openBookingModal();

@@ -21,10 +21,10 @@ class SearchArea extends Component {
     this.state = {
       locations: [],
       selectedLocation: "",
-      selectedArrivalDate: "",
+      selectedArrivalDate: moment().format("YYYY-MM-DD"),
       selectedArrivalTime: "",
-      selectedDuration: 0,
-      selectedType: "",
+      selectedDuration: 1,
+      selectedType: "four wheels",
       advancedSearchDisplay: "none",
     };
   }
@@ -63,7 +63,6 @@ class SearchArea extends Component {
     const startMoment = moment(this.state.selectedArrivalDate + " " + this.state.selectedArrivalTime);
     const endMoment = moment(this.state.selectedArrivalDate + " " + this.state.selectedArrivalTime).add(this.state.selectedDuration, 'hours');
     const DATE_FORMAT = "YYYY-MM-DD hh:mm:ss";
-    console.log(startMoment.format(DATE_FORMAT));
 
     const params = {
       location: this.state.selectedLocation,
@@ -103,7 +102,7 @@ class SearchArea extends Component {
             <span className="formLable">Arrival Date:</span>
             <DatePicker
               disabledDate={disabledDate}
-              defaultValue={moment()} format={"YYYY/MM/DD"}
+              defaultValue={moment()}
               onChange={this.handleArrivalDateChange}
             />
           </Form.Item>
