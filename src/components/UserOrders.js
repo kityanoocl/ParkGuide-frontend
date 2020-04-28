@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {Divider} from 'antd'
 
 export default class UserOrders extends Component {
     constructor(props) {
@@ -8,7 +9,8 @@ export default class UserOrders extends Component {
         this.state = {
             userOrders: [],
             parkingLotId: 0,
-        parkingLotName:''        }
+            parkingLotName: ''
+        }
     }
 
     componentDidMount() {
@@ -19,14 +21,17 @@ export default class UserOrders extends Component {
             .then(response => response.data)
             .then(data => {
                 this.setState({
-                    userOrders: data,
-                    parkingLotId: data.parkingLotId
+                    userOrders: data
                 })
                 console.log(data)
                 console.log(this.state.userOrders)
             })
 
+        // axios.get("http://CHIURE-w10-3:8082/rest/parkguide/parking-lots/")
+        //     .then(response => response.data)
+
     }
+
 
     listItems = () =>
         this.state.userOrders.map(order => (
@@ -35,6 +40,7 @@ export default class UserOrders extends Component {
                 <p>{order.parkingLotId}</p>
                 <p>{order.parkingStartTime}</p>
                 <p>{order.parkingEndTime}</p>
+                <Divider/>
             </div>
         ));
 
