@@ -4,7 +4,9 @@ import { NavLink } from "react-router-dom";
 import logo from '../img/banner.png'
 const { Text } = Typography;
 class Banner extends Component {
+  
   render() {
+
     return (
       <React.Fragment>
         <div className="formArea">

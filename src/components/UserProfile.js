@@ -12,6 +12,7 @@ export default class UserProfile extends Component {
             carLicense: '',
             location: '',
             membershipLevel: 0,
+            credit: 0,
             userParam: ''
 
         }
@@ -72,7 +73,8 @@ export default class UserProfile extends Component {
                     fullName: response.data.fullName,
                     carLicense: response.data.carLicense,
                     location: response.data.location,
-                    membershipLevel: response.data.membershipLevel
+                    membershipLevel: response.data.membershipLevel,
+                    credit: response.data.credit
 
                 })
                 console.log(response.data.id + '   ' + this.state.fullName)
@@ -80,9 +82,11 @@ export default class UserProfile extends Component {
     }
 
 
+    
 
     render() {
-        const { carLicense, location, fullName, membershipLevel } = this.state
+        const { carLicense, location, fullName, membershipLevel, credit } = this.state
+        
         return (
             <div>
                 <h2>User Profile</h2>
@@ -116,11 +120,12 @@ export default class UserProfile extends Component {
                     <Form.Item label="Membership level: ">
                         <Input required autoComplete="off" name="membershipLevel" value={membershipLevel}
                             disabled="true"></Input>
-
                     </Form.Item>
 
-
-
+                    <Form.Item label="Credit: ">
+                        <Input required autoComplete="off" name="credit" value={credit}
+                            disabled="true"></Input>
+                    </Form.Item>
 
                     <Button size="sm" type="submit" onClick={this.onUpdate}>Submit</Button>
 

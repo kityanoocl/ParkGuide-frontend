@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { Layout, Space, Button } from "antd";
-import { Router, Route, NavLink, Switch } from "react-router-dom";
-import { CarOutlined } from "@ant-design/icons";
+import { Space, Button } from "antd";
+import { NavLink } from "react-router-dom";
 
-const { Header, Content, Footer } = Layout;
 export default class NavigationBar extends Component {
     constructor(props) {
         super(props)
@@ -22,19 +20,17 @@ onClick(){
         console.log(this.props.isLoggedIn)
         const { name } = this.props
         const userLink = name ? "/UserProfile/" + this.props.userID : "/LoginPage"
+        const userOrders = "/UserOrders/" + this.props.userID
 
         return (
-            <div className="loginAndRegister">
+            <div className="loginAndRegister">           
                 <Space>
                     <Button><NavLink to="/"> Home </NavLink></Button>
                     <Button><NavLink to={userLink}> {name ? name : 'Login'}</NavLink></Button>
-                    {name ? <Button onClick={this.onClick}><NavLink to="/"> Logout </NavLink></Button> : '' }
-                    
+                    {name ? <Button><NavLink to={userOrders}> Orders </NavLink></Button> : '' }        
+                    {name ? <Button onClick={this.onClick}><NavLink to="/"> Logout </NavLink></Button> : '' }             
                 </Space>
-
             </div>
-
-
         )
     }
 }

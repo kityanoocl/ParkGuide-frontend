@@ -4,7 +4,6 @@ import axios from 'axios'
 import { NavLink } from "react-router-dom";
 import { Input, Button, Form } from 'antd'
 import history from './../history';
-import NavigationBar from './NavigationBar';
 
 export default class Facebook extends Component {
     constructor(props) {

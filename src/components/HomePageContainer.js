@@ -7,7 +7,7 @@ class HomePageContainer extends Component {
   render() {
     return (
       <div id="HomePageContainer">
-        <Banner />
+        <Banner onLogin={this.props.onLogin}/>
         <Divider className="divider" />
         <ParkingLotList />
       </div>
