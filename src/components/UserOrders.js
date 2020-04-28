@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Divider} from 'antd'
+import {Divider, Typography} from 'antd'
+const { Text } = Typography;
 
 export default class UserOrders extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            userOrders: [],
-            parkingLotId: 0,
-            parkingLotName: ''
+            userOrders: []
         }
     }
 
@@ -36,10 +35,14 @@ export default class UserOrders extends Component {
     listItems = () =>
         this.state.userOrders.map(order => (
             <div className="card">
-                <h1>{order.id}</h1>
-                <p>{order.parkingLotId}</p>
-                <p>{order.parkingStartTime}</p>
-                <p>{order.parkingEndTime}</p>
+                <p><b>Order Id: </b>000000000{order.orderId}</p>
+                <p><b>Parking lot name: </b>{order.parkingLotName}</p>
+                <p><b>Parking lot location: </b> {order.parkingLotLocation}</p>
+                <p><b>Parking lot type: </b> {order.parkingSlotType}</p>
+                <p><b>Start time: </b> {order.parkingStartTime}</p>
+                <p><b>End time: </b> {order.parkingEndTime}</p>
+                <p><b>Order status: </b>{order.status}</p>
+                
                 <Divider/>
             </div>
         ));
