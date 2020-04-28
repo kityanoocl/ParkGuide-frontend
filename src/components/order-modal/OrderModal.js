@@ -27,7 +27,9 @@ class OrderModal extends Component {
       this.state.discountId,
       this.props.userCriteria.startTime,
       this.props.userCriteria.endTime
-    ).then((response) => {console.log(response)});
+    ).then((response) => {
+      response.status === 201 ? window.location.replace("/") : alert("Failed to place order.");
+    });
   }
 
   handleDiscountChange(value) {
